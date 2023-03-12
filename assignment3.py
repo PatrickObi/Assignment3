@@ -89,4 +89,17 @@ def hill_valley_rnn_model(dataset_filepath):
     # model is a trained keras rnn model for predicting compressive strength
     # training_performance is the performance of the model on the training set
     # validation_performance is the performance of the model on the validation set
+    traindatasetFilepath = "./“Hill_Valley_with_noise_Training.data"
+    validdataset_filepath = "./“Hill_Valley_with_noise_Validation.data"
+
+    model = keras.Sequential([
+        keras.layers.InputLayer(input_shape=(traindatasetFilepath, validdataset_filepath)),
+        keras.layers.LSTM(256),
+        keras.layers.Dense(256, activation="relu"),
+        keras.layers.Dense(102, activation='softmax'),
+    ])
+
+    model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"])
+    training_performance = model.evaluate(traindatasetFilepath)
+    validation_performance = model.evaluate(traindatasetFilepath)
     return model, training_performance, validation_performance
