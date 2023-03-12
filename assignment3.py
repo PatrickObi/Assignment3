@@ -100,6 +100,8 @@ def hill_valley_rnn_model(dataset_filepath):
     ])
 
     model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"])
+    
+    model.fit(traindatasetFilepath, epochs=10)
     training_performance = model.evaluate(traindatasetFilepath)
     validation_performance = model.evaluate(traindatasetFilepath)
     return model, training_performance, validation_performance
